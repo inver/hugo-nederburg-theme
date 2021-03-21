@@ -3,11 +3,11 @@
 {{ $jsSlice := slice $jquery $jquerymigrate }}
 {{ $js := $jsSlice | resources.Concat "js/bundle.js" | resources.Minify | resources.Fingerprint }}
 
-<script async rel="preconnect" src="{{ $js.Permalink }}"></script>
+<script rel="preconnect" src="{{ $js.Permalink }}"></script>
 <script rel="preconnect" src="{{ (resources.Get "js/production.min.js").Permalink }}?v={{ now.Unix }}"></script>
 
 {{ if .Page.Params.useGallery}}
-    <script async rel="preconnect" src="{{ (resources.Get "js/lightbox.min.js").Permalink }}"></script>
+    <script src="{{ (resources.Get "js/lightbox.min.js").Permalink }}"></script>
 {{ end }}
 
 <!-- Global site tag (gtag.js) - Google Analytics -->

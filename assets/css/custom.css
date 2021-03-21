@@ -2709,3 +2709,35 @@ li.pingback:first-child {
 .lb-data .lb-close{
     background:url(../images/lightbox/close.png) top right no-repeat;
 }
+
+.imageCopyright {
+    text-align: right;
+    color: white;
+    padding-top: 4px;
+    padding-right: 16px;
+    padding-left: 16px;
+    background-color: black;
+    opacity: 85%;
+    z-index: 999;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.imageCopyright a {
+    color: #6767ff !important;
+}
+
+@media all and (min-width: 37.5em){
+    .bio {
+        width: auto;
+    }
+}
+
+.site-footer {
+    padding-top: 2em !important;
+}
+
+.excerpt-content ul{
+    text-align: left;
+}

@@ -31,10 +31,16 @@
                     ></div>
                 </a>
             {{ else }}
-                {{ if .Resources.Match "img/header.png" }}
-                    {{ $header := .Page.Resources.GetMatch "img/header.png" }}
+                {{ if .Resources.Match "img/cover.png" }}
+                    {{ $header := .Page.Resources.GetMatch "img/cover.png" }}
                     <a class="featured-image-link" href="{{ .Permalink }}" title="{{ .Title }}">
-                        <div class='featured-image lazy lazy-bg-image' data-background="{{ $header.Permalink }}"
+                        <div class='featured-image lazy lazy-bg-image' data-background="{{ $header.RelPermalink }}"
+                        ></div>
+                    </a>
+                {{ else if .Resources.Match "img/cover.jpg"}}
+                    {{ $header := .Page.Resources.GetMatch "img/cover.jpg" }}
+                    <a class="featured-image-link" href="{{ .Permalink }}" title="{{ .Title }}">
+                        <div class='featured-image lazy lazy-bg-image' data-background="{{ $header.RelPermalink }}"
                         ></div>
                     </a>
                 {{ end }}
