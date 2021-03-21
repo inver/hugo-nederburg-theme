@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # clean
-rm -rf demo
+./clean.sh
 
 # prepare
 mkdir -p demo/themes/hugo-nederburg-theme

@@ -1,9 +1,13 @@
-<script src="{{ "js/jquery.min.js" | absURL }}"></script>
-<script src="{{ "js/jquerymigrate.js" | absURL }}"></script>
-<script src="{{ "js/production.min.js" | absURL }}?v={{ now.Unix }}"></script>
+{{ $jquery := resources.Get "js/jquery.min.js" }}
+{{ $jquerymigrate := resources.Get "js/jquerymigrate.js" }}
+{{ $jsSlice := slice $jquery $jquerymigrate }}
+{{ $js := $jsSlice | resources.Concat "js/bundle.js" | resources.Minify | resources.Fingerprint }}
+
+<script async rel="preconnect" src="{{ $js.Permalink }}"></script>
+<script rel="preconnect" src="{{ (resources.Get "js/production.min.js").Permalink }}?v={{ now.Unix }}"></script>
 
 {{ if .Page.Params.useGallery}}
-    <script src="{{ "js/lightbox.min.js" | absURL }}"></script>
+    <script async rel="preconnect" src="{{ (resources.Get "js/lightbox.min.js").Permalink }}"></script>
 {{ end }}
 
 <!-- Global site tag (gtag.js) - Google Analytics -->

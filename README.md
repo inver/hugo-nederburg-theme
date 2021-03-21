@@ -82,16 +82,17 @@ Now enter [`localhost:1313`](http://localhost:1313) in the address bar of your b
 
 
 ## Things to do and not (yet) implemented
-
+ - Add a missed favicon.
  - Add the possibility for a description for each category.
  - ~~Add pagination to the front page.~~
  - Add dropdown menu option to the left sub menu.
  - Add previous next pagination in blog post.
  - Add a search function.
- - Do a SEO check of site structure and code
+ - Do a SEO check of site structure and code.
  - Page speed check
  - ~~Add a default favicon~~
  - Check that Disqus don’t break anything.
+ - Add cover image from cover.png or cover.jpg.
 
 ## Contributing
 
@@ -100,7 +101,6 @@ Have you found a bug or got an idea for a new feature? Feel free to use the [iss
 ## License
 
 This port is released under the MIT License.
-
 
 ## Thanks
 
