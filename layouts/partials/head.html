@@ -2,18 +2,21 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8"/>
 {{ partial "schema" . }}
-
+{{ range .AlternativeOutputFormats -}}
+    <link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink | safeURL }}">
+{{ end -}}
 {{ with .Title }}
     <title>
         {{ if $.IsHome}}
             {{ $.Site.Params.slogan | default "" | safeHTML }}
         {{ else if $.Site.Params.sections }}
-            {{ $sectionName := (index $.Site.Params.sections $.Section).Name }}
+            {{ $sectionName := (index $.Site.Params.sections $.Page.Name).Name }}
             {{ if $sectionName }}
-                {{ $sectionName }}: {{ $.Title }}
+                {{ humanize ( $sectionName ) }}
             {{ else }}
-                {{ $.Title }}
+                {{ (humanize $.Section) }}
             {{ end }}
+            {{ $.Title }}
         {{ else }}
             {{ $.Title }}
         {{ end }}
@@ -21,7 +24,17 @@
     </title>
 {{ end }}
 
-{{ if .Description }}
+{{ if or (eq .Section "categories") (eq .Section "tags") }}
+    {{ $sectionDescription := (index .Site.Params.sections $.Section).Name }}
+    <meta name="description" content="
+    {{ if $sectionDescription }}
+        {{ humanize $sectionDescription }}
+    {{ else }}
+        {{ humanize $.Section }}
+    {{ end }}
+    {{ $.Title }}
+    " />
+{{ else if .Description }}
     <meta name="description" content="{{ .Description }}"/>
 {{ else }}
     <meta name="description" content="{{ .Site.Params.description }}"/>
@@ -57,7 +70,7 @@
 <link rel="preconnect apple-touch-icon" sizes="180x180" href="{{ "favicon/apple-touch-icon.png" | relURL }}">
 <link rel="preconnect icon" type="image/png" sizes="32x32" href="{{ "favicon/favicon-32x32.png" | relURL }}">
 <link rel="preconnect icon" type="image/png" sizes="16x16" href="{{ "favicon/favicon-16x16.png" | relURL }}">
-<link rel="preconnect manifest" href="site.webmanifest">
+<link rel="preconnect manifest" href="/site.webmanifest">
 
 {{ if .RSSLink }}
     <link href="{{ .RSSLink }}" rel="alternate" type="application/rss+xml" title="{{ .Site.Title | default "" }}"/>

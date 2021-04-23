@@ -1,3 +1,12 @@
+{{ define "partials/image-copyright" }}
+    {{if and $.Params.imageLink $.Params.imageAuthor}}
+    <span class="imageCopyright">Illustration by <a
+            href="{{.Params.imageLink}}"
+            target="_blank"
+            title="Image original link">{{.Params.imageAuthor}}</a></span>
+    {{end}}
+{{ end }}
+
 {{ define "body" }}
 <body class="post-template-default single single-post single-format-standard ct-body singular singular-post not-front standard">
 {{ end }}
@@ -29,22 +38,21 @@
         data-background="{{ (printf "%s%s" .Site.BaseURL .Params.image ) | relURL }}"
         {{ end }}
         >
-        {{if and .Params.imageLink .Params.imageAuthor}}
-        <span class="imageCopyright">Illustration by <a
-                href="{{.Params.imageLink}}"
-                target="_blank"
-                title="Image original link">{{.Params.imageAuthor}}</a></span>
-        {{end}}
+        {{ partial "image-copyright" . }}
     </div>
     {{ else }}
         {{ if .Page.Resources.Match "img/cover.png" }}
             {{ $header := .Page.Resources.GetMatch "img/cover.png" }}
             <div class="post type-post status-publish format-standard has-post-thumbnail hentry category-design tag-design tag-standard-2 tag-tagalicious tag-travel entry full-without-featured odd excerpt-1">
-                <div class='featured-image lazy lazy-bg-image' data-background="{{ $header.Permalink }}" ></div>
+                <div class='featured-image lazy lazy-bg-image' data-background="{{ $header.Permalink }}" >
+                    {{ partial "image-copyright" . }}
+                </div>
         {{ else if .Page.Resources.Match "img/cover.jpg"}}
             {{ $header := .Page.Resources.GetMatch "img/cover.jpg" }}
             <div class="post type-post status-publish format-standard has-post-thumbnail hentry category-design tag-design tag-standard-2 tag-tagalicious tag-travel entry full-without-featured odd excerpt-1">
-                <div class='featured-image lazy lazy-bg-image' data-background="{{ $header.Permalink }}" ></div>
+                <div class='featured-image lazy lazy-bg-image' data-background="{{ $header.Permalink }}" >
+                    {{ partial "image-copyright" . }}
+                </div>
         {{ else }}
             <div class="post type-post status-publish format-standard hentry category-standard category-travel entry full-without-featured odd excerpt-1">
         {{ end }}
@@ -149,7 +157,7 @@
 
                         {{ if isset .Params "writer" }}
                         {{ with $writer.facebook }}
-                        <a class="facebook" target="_blank" href="{{ . }}" title="Facebook">
+                        <a class="facebook" target="_blank" href="{{ . }}" title="Facebook" rel="noreferrer">
                             <i class="fab fa-facebook-square" title="facebook"></i>
                             <span class="screen-reader-text">facebook</span>
                         </a>
@@ -177,14 +185,14 @@
                         {{end}}
                         {{ else }}
                         {{ with .Site.Params.social.facebook }}
-                        <a class="facebook" target="_blank" href="{{ . }}" title="Facebook">
+                        <a class="facebook" target="_blank" href="{{ . }}" title="Facebook" rel="noreferrer">
                             <i class="fab fa-facebook-square" title="facebook"></i>
                             <span class="screen-reader-text">facebook</span>
                         </a>
                         {{end}}
 
                         {{ with .Site.Params.social.linkedin }}
-                        <a class="linkedin" target="_blank" href="{{ . }}" title="Linked in">
+                        <a class="linkedin" target="_blank" href="{{ . }}" title="Linked in" rel="noreferrer">
                             <i class="fa fa-linkedin-square"
                                title="linkedin icon"></i>
                         </a>

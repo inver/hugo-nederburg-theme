@@ -25,15 +25,6 @@
     {{ partial "social-media.html" . }}
 
     <div class="design-credit">
-        {{ range .Site.Params.copyright }}
-            <p>{{ . | markdownify }}</p>
-        {{ else }}
-            <p>
-                Nederburg Hugo Theme by <a target="_blank" href="https://appernetic.io">Appernetic</a>.
-            </p>
-            <p>
-                A port of Tracks by Compete Themes.
-            </p>
-        {{ end }}
+            <p>&copy; {{ now.Format "2006" }} {{ .Site.Params.author }}</p>
     </div>
 </footer>
